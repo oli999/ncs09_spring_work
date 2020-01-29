@@ -27,7 +27,11 @@
 		
 	<servlet-mapping>
 		<servlet-name>appServlet</servlet-name>
-		<url-pattern>/</url-pattern>
+		<url-pattern>*.do</url-pattern>
 	</servlet-mapping>
-
+	
+	<!-- 최상위 경로 요청이 왔을때 home.do 요청이 자동으로 되도록 설정 -->
+	<welcome-file-list>
+		<welcome-file>home.do</welcome-file>
+	</welcome-file-list>
 </web-app>
