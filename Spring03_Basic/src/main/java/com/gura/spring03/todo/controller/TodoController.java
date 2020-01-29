@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 //1. Controller 어노테이션
 @Controller
@@ -24,6 +25,24 @@ public class TodoController {
 		request.setAttribute("todoList", todoList);
 		//5. view page 의 정보를 리턴하면 해당페이지로  forward 이동해서 응답이 된다.  
 		return "todo/list";
+	}
+	
+	@RequestMapping("/todo/list2") // .do 는 생략가능!
+	public ModelAndView list2() {
+		//Model 
+		List<String> todoList=new ArrayList<String>();
+		todoList.add("html 공부하기");
+		todoList.add("css  공부하기");
+		todoList.add("javascript 공부하기");
+		//Model 과 view page 정보를 담을수 있는 객체 생성
+		ModelAndView mView=new ModelAndView();
+		//ModelAndView 객체에 .addObject(key,value) 로 담은 객체는
+		//자동으로 request 객체에 담긴다.
+		mView.addObject("todoList", todoList);
+		//view page 정보도 .setViewName() 메소드를 이용해서 담는다.
+		mView.setViewName("todo/list");
+		//Model 과 view page 정보가 담긴 객체를 리턴해 준다.
+		return mView;
 	}
 }
 
