@@ -1,0 +1,6 @@
+@charset "utf-8";
+
+/* 상단 navbar 때문에 필요한 css */
+body{
+	padding-top: 60px;
+}
