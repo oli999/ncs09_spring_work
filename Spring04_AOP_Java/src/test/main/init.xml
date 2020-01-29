@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd">
+	<!-- 컴포넌트 스캔을 해서 bean 으로 만들 객체는 만들어 준다. -->
+	<context:component-scan base-package="test.mypac"/>
+	<context:component-scan base-package="test.aspect"/>
+	
+	<!-- annotation 기반으로 aop 를 자동 적용하기 위한 설정 -->
+	<aop:aspectj-autoproxy/>
+</beans>
+
+
+
+
+
