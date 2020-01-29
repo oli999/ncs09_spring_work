@@ -4,9 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 /*
  *  @Controller 어노테이션
@@ -42,7 +44,32 @@ public class HomeController {
 		 */
 		return "home";
 	}
+	
+	@RequestMapping("/play")
+	public ModelAndView play(HttpSession session, 
+			ModelAndView mView) {
+		//세션에 로그인 정보가 있는지 확인 한다. 
+		String id=(String)session.getAttribute("id");
+		if(id == null) {//로그인이 되지 않은 상태
+			//로그인 폼으로 리다일렉트 시킨다.
+			mView.setViewName("redirect:/users/loginform.do");
+		}else {//로그인 된 상태 
+			//forward 이동해서 응답한다. 
+			mView.setViewName("play");
+		}
+		return mView;
+	}
 }
+
+
+
+
+
+
+
+
+
+
 
 
 

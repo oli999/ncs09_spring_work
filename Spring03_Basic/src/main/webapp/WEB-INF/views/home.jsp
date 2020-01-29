@@ -20,6 +20,7 @@
 	<li><a href="todo/list2.do">할일 목록 보기2</a></li>
 	<li><a href="todo/list3.do">할일 목록 보기3</a></li>
 	<li><a href="users/loginform.do">로그인 하러가기</a></li>
+	<li><a href="play.do">회원 전용 공간으로 가기</a></li>
 </ul>
 <h2>공지사항</h2>
 <ul>
