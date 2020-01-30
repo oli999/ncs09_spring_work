@@ -6,6 +6,36 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd
 		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
+	<!-- 
+		아래의 MyBatis 관련 설정은 Servers/context.xml 문서에 
+		
+		<Resource name="jdbc/myoracle" auth="Container"
+           type="javax.sql.DataSource" 
+           driverClassName="oracle.jdbc.OracleDriver"
+           url="jdbc:oracle:thin:@127.0.0.1:1521:xe"
+           username="scott" password="tiger" 
+           maxTotal="20" maxIdle="10"
+           maxWaitMillis="-1"/>
+           
+               위와 같은 DB 접속 정보가 있어야지 동작한다. 
+	 -->
+	<beans:bean id="dataSource" 
+		class="org.springframework.jndi.JndiObjectFactoryBean">
+		<beans:property name="jndiName" value="java:comp/env/jdbc/myoracle"/>
+	</beans:bean>
+	
+	<beans:bean id="sessionFactory" 
+		class="org.mybatis.spring.SqlSessionFactoryBean">
+		<beans:property name="dataSource" ref="dataSource"/>
+		<beans:property name="configLocation"
+	value="classpath:com/gura/spring05/mybatis/Configuration.xml"/>
+	</beans:bean>
+	
+	<beans:bean class="org.mybatis.spring.SqlSessionTemplate">
+		<beans:constructor-arg name="sqlSessionFactory" 
+			ref="sessionFactory"/>
+	</beans:bean>
+
 
 	<!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
 	
