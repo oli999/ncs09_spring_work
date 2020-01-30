@@ -1,5 +1,6 @@
 package test.aspect;
 
+import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.springframework.stereotype.Component;
@@ -16,6 +17,10 @@ public class PenAspect {
 	@Before("execution(void write*())")
 	public void prepare() {
 		System.out.println("Pen 을 준비해요!");
+	}
+	@After("execution(void write*())")
+	public void end() {
+		System.out.println("Pen 을 마무리 해요!");
 	}
 }
 
