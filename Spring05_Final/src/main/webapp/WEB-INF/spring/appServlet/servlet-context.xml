@@ -35,7 +35,18 @@
 		<beans:constructor-arg name="sqlSessionFactory" 
 			ref="sessionFactory"/>
 	</beans:bean>
-
+	<!-- 
+		위의 설정을 java code 로 환산하면
+		
+		dataSource=new JndiObjectFactoryBean();
+		dataSource.setJndiName("java:comp/env/jdbc/myoracle");
+		
+		sessionFactory=new SqlSessionFactoryBean();
+		sessionFactory.setDataSource(dataSource);
+		sessionFactory.setConfigLocation("classpath:com/gura/spring05/mybatis/Configuration.xml");
+	 
+	 	new SqlSessionTemplate(sessionFactory);
+	 -->
 
 	<!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
 	
