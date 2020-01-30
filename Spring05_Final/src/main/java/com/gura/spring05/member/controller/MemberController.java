@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.gura.spring05.member.dao.MemberDao;
@@ -25,6 +26,14 @@ public class MemberController {
 		mView.addObject("list", list);
 		mView.setViewName("member/list");
 		return mView;
+	}
+	//회원정보 삭제 요청 처리
+	@RequestMapping("/member/delete")
+	public String delete(@RequestParam int num) {
+		//MemberDao 객체를 이용해서 회원정보 삭제
+		dao.delete(num);
+		//리다일렉트 응답
+		return "redirect:/member/list.do";
 	}
 }
 
