@@ -12,6 +12,13 @@
 		DELETE FROM member
 		WHERE num=#{num}
 	</delete>
+	
+	<insert id="insert" 
+		parameterType="com.gura.spring05.member.dto.MemberDto">
+		INSERT INTO member
+		(num, name, addr)
+		VALUES(member_seq.NEXTVAL, #{name}, #{addr})
+	</insert>
 </mapper>
 
 

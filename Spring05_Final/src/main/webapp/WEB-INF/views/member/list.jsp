@@ -30,6 +30,7 @@
 			</c:forEach>
 		</tbody>
 	</table>
+	<a href="insertform.do">회원 정보 추가 하러 가기</a>
 </div>
 </body>
 </html>

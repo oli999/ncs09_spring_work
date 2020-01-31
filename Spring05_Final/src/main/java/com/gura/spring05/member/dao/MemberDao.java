@@ -7,4 +7,5 @@ import com.gura.spring05.member.dto.MemberDto;
 public interface MemberDao {
 	public List<MemberDto> getList();
 	public void delete(int num);
+	public void insert(MemberDto dto);
 }
