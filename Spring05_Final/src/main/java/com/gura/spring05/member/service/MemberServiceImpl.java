@@ -26,6 +26,22 @@ public class MemberServiceImpl implements MemberService{
 	public void addMember(MemberDto dto) {
 		dao.insert(dto);
 	}
+	//회원 한명의 정보를 ModelAndView 객체에 담는 비즈니스 로직 처리 
+	@Override
+	public void getMember(ModelAndView mView, int num) {
+		MemberDto dto=dao.getData(num);
+		mView.addObject("dto", dto);
+	}
+	//회원정보를 수정하는 비즈니스 로직 처리 
+	@Override
+	public void updateMember(MemberDto dto) {
+		dao.update(dto);
+	}
+	//회원 정보를 삭제하는 비즈니스 로직 처리 
+	@Override
+	public void deleteMember(int num) {
+		dao.delete(num);
+	}
 
 }
 
