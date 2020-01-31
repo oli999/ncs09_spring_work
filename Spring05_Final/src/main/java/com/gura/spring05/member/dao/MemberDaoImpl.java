@@ -37,6 +37,11 @@ public class MemberDaoImpl implements MemberDao{
 		return dto;
 	}
 
+	@Override
+	public void update(MemberDto dto) {
+		session.update("member.update", dto);
+	}
+
 }
 
 

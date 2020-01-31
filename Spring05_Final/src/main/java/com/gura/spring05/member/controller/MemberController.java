@@ -6,6 +6,7 @@ import javax.annotation.Resource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -75,7 +76,19 @@ public class MemberController {
 		mView.setViewName("member/updateform");
 		return mView;
 	}
+	@RequestMapping("/member/update")
+	public ModelAndView update(@ModelAttribute("dto") MemberDto dto,
+			ModelAndView mView) {
+		dao.update(dto);
+		mView.setViewName("member/update");
+		return mView;
+	}
 }
+
+
+
+
+
 
 
 

@@ -26,6 +26,14 @@
 		FROM member
 		WHERE num=#{num}
 	</select>
+	
+	<update id="update" 
+		parameterType="com.gura.spring05.member.dto.MemberDto">
+		UPDATE member
+		SET name=#{name}, addr=#{addr}
+		WHERE num=#{num}
+	</update>
+	
 </mapper>
 
 
