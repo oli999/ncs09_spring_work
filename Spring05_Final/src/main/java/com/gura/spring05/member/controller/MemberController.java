@@ -53,7 +53,8 @@ public class MemberController {
 	@RequestMapping("/member/insert")
 	public ModelAndView insert(@ModelAttribute("dto") MemberDto dto,
 			ModelAndView mView) {
-		dao.insert(dto);
+		//서비스를 통해서 비즈니스 로직 처리 
+		service.addMember(dto);
 		/*
 		 *  @ModelAttribute("dto") MemberDto dto 의 의미는
 		 *  1. 전송되는 파라미터를 자동으로 추출해서 MemberDto 에 담아 주기도하고
