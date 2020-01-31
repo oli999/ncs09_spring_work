@@ -19,6 +19,13 @@
 		(num, name, addr)
 		VALUES(member_seq.NEXTVAL, #{name}, #{addr})
 	</insert>
+	
+	<select id="getData" parameterType="int"
+		resultType="com.gura.spring05.member.dto.MemberDto">
+		SELECT num,name,addr
+		FROM member
+		WHERE num=#{num}
+	</select>
 </mapper>
 
 
