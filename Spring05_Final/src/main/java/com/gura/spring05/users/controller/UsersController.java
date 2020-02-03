@@ -166,7 +166,13 @@ public class UsersController {
 		map.put("savedPath", path);
 		return map;
 	}
-	
+	//비밀번호 수정하기 폼 요청 처리
+	@RequestMapping("/users/pwd_updateform")
+	public ModelAndView authPwdForm(HttpServletRequest request,
+			ModelAndView mView) {
+		mView.setViewName("users/pwd_updateform");
+		return mView;
+	}
 }
 
 
