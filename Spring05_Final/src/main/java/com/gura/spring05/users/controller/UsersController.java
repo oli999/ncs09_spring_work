@@ -4,10 +4,14 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
+import com.gura.spring05.users.dto.UsersDto;
 import com.gura.spring05.users.service.UsersService;
 
 @Controller
@@ -31,7 +35,22 @@ public class UsersController {
 		Map<String, Object> map=service.isExistId(inputId);
 		return map;
 	}
+	// POST 방식 /users/signup.do 요청 처리 
+	@RequestMapping(value = "/users/signup", method = RequestMethod.POST)
+	public ModelAndView signup(@ModelAttribute("dto") UsersDto dto,
+			ModelAndView mView) {
+		service.addUser(dto);
+		mView.setViewName("users/insert");
+		return mView;
+	}
 }
+
+
+
+
+
+
+
 
 
 
