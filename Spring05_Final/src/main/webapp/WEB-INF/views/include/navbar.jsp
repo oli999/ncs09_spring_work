@@ -30,7 +30,7 @@
 				</c:when>
 				<c:otherwise>
 					<p class="navbar-text pull-right">
-						<strong><a class="navbar-link" href="${pageContext.request.contextPath }/users/private/info.do">${id }</a></strong>
+						<strong><a class="navbar-link" href="${pageContext.request.contextPath }/users/info.do">${id }</a></strong>
 						<a class="navbar-link" href="${pageContext.request.contextPath }/users/logout.do">로그아웃</a> 
 					</p>
 				</c:otherwise>
