@@ -39,6 +39,11 @@
 		SET email=#{email}
 		WHERE id=#{id}
 	</update>
+	
+	<delete id="delete" parameterType="String">
+		DELETE FROM users
+		WHERE id=#{id}
+	</delete>
 </mapper>
 
 

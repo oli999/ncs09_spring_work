@@ -121,6 +121,10 @@ public class UsersServiceImpl implements UsersService{
 	public void updateUser(UsersDto dto) {
 		dao.updateUser(dto);
 	}
+	@Override
+	public void deleteUser(String id) {
+		dao.delete(id);
+	}
 
 }
 
