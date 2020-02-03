@@ -99,6 +99,24 @@ public class UsersServiceImpl implements UsersService{
 		//이미지 경로 리턴해주기 
 		return path;
 	}
+	@Override
+	public void updatePassword(UsersDto dto, ModelAndView mView) {
+		//1. 예전 비밀번호가 맞는 정보인지 확인
+		String pwdHash=dao.getData(dto.getId()).getPwd();
+		boolean isValid=BCrypt.checkpw(dto.getPwd(), pwdHash);
+		//2. 만일 맞다면 새로 비밀번호를 암호화 해서 저장하기
+		if(isValid) {
+			//새 비밀번호를 암호화 해서 dto 에 담고 
+			String encodedPwd=new BCryptPasswordEncoder()
+					.encode(dto.getNewPwd());
+			dto.setPwd(encodedPwd);
+			//DB 에 수정 반영하기
+			dao.updatePwd(dto);
+			mView.addObject("isSuccess", true);
+		}else {
+			mView.addObject("isSuccess", false);
+		}
+	}
 
 }
 
