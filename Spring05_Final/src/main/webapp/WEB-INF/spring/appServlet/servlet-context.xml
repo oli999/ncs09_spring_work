@@ -69,6 +69,11 @@
 	<!-- 어노테이션 기반으로 aop 적용할수 있도록 설정 -->
 	<aop:aspectj-autoproxy></aop:aspectj-autoproxy>
 	
+	<!-- 파일 업로드 폼 전송 처리를 위한 bean 설정 -->
+	<beans:bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<beans:property name="maxUploadSize" value="10240000"/>
+	</beans:bean>
 </beans:beans>
 
 
