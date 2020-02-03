@@ -6,10 +6,16 @@
 	<!-- 자주 사용하는 type 의 별칭 지정하기 -->
 	<typeAliases>
 		<typeAlias type="com.gura.spring05.member.dto.MemberDto" alias="memberDto"/>
+		<typeAlias type="com.gura.spring05.users.dto.UsersDto" alias="usersDto"/>
 	</typeAliases>
 
 	<!-- mapper 설정 -->
 	<mappers>
 		<mapper resource="com/gura/spring05/mybatis/MemberMapper.xml"/>
+		<mapper resource="com/gura/spring05/mybatis/UsersMapper.xml"/>
 	</mappers>
 </configuration>
+
+
+
+
