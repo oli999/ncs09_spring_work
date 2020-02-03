@@ -33,6 +33,12 @@
 		SET pwd=#{pwd}
 		WHERE id=#{id}
 	</update>
+	
+	<update id="updateUser" parameterType="usersDto">
+		UPDATE users
+		SET email=#{email}
+		WHERE id=#{id}
+	</update>
 </mapper>
 
 
