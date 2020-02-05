@@ -74,6 +74,12 @@
 		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
 		<beans:property name="maxUploadSize" value="10240000"/>
 	</beans:bean>
+	
+	<!-- bean 의 이름으로 view 를 찾아 갈수 있도록 설정 -->
+	<beans:bean class="org.springframework.web.servlet.view.BeanNameViewResolver">
+		<!-- 0 순위로 찾아가도록 하고 없으면 자동으로 views 폴더 안에서 jsp 페이지를 찾는다 -->
+		<beans:property name="order" value="0"/>
+	</beans:bean>
 </beans:beans>
 
 
