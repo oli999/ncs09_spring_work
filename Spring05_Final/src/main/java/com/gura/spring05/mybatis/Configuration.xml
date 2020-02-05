@@ -7,12 +7,14 @@
 	<typeAliases>
 		<typeAlias type="com.gura.spring05.member.dto.MemberDto" alias="memberDto"/>
 		<typeAlias type="com.gura.spring05.users.dto.UsersDto" alias="usersDto"/>
+	    <typeAlias type="com.gura.spring05.file.dto.FileDto" alias="fileDto"/>
 	</typeAliases>
 
 	<!-- mapper 설정 -->
 	<mappers>
 		<mapper resource="com/gura/spring05/mybatis/MemberMapper.xml"/>
 		<mapper resource="com/gura/spring05/mybatis/UsersMapper.xml"/>
+		<mapper resource="com/gura/spring05/mybatis/FileMapper.xml"/>
 	</mappers>
 </configuration>
 
