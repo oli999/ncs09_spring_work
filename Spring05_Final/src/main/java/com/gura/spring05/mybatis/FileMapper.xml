@@ -15,6 +15,13 @@
 				ORDER BY num DESC) result1)
 		WHERE rnum BETWEEN #{startRowNum} AND #{endRowNum}
 	</select>
+	<insert id="insert" parameterType="fileDto">
+		INSERT INTO board_file
+		(num, writer, title, orgFileName, saveFileName, fileSize, 
+			downCount, regdate)
+		VALUES(board_file_seq.NEXTVAL, #{writer}, #{title}, #{orgFileName},
+		#{saveFileName}, #{fileSize}, #{downCount}, SYSDATE)
+	</insert>
 </mapper>
 
 
