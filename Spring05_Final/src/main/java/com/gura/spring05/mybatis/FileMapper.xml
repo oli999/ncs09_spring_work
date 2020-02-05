@@ -1,9 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="file">
-	<select id="getCount" resultType="int">
-		SELECT MAX(ROWNUM)
+	<select id="getCount" parameterType="fileDto" resultType="int">
+		SELECT NVL(MAX(ROWNUM), 0)
 		FROM board_file
+		<choose>
+			<when test="title != null and orgFileName != null">
+				WHERE title LIKE '%${title}%' 
+				OR orgFileName LIKE '%${orgFileName}%'
+			</when>
+			<when test="title != null">
+				WHERE title LIKE '%${title}%'
+			</when>
+			<when test="writer != null">
+				WHERE writer LIKE '%${writer}%'
+			</when>
+		</choose>
 	</select>
 	<select id="getList" parameterType="fileDto" resultType="fileDto">
 		SELECT *
@@ -12,6 +24,18 @@
 			FROM
 				(SELECT num,writer,title,orgFileName,fileSize,downCount,regdate
 				FROM board_file
+				<choose>
+					<when test="title != null and orgFileName != null">
+						WHERE title LIKE '%${title}%' 
+						OR orgFileName LIKE '%${orgFileName}%'
+					</when>
+					<when test="title != null">
+						WHERE title LIKE '%${title}%'
+					</when>
+					<when test="writer != null">
+						WHERE writer LIKE '%${writer}%'
+					</when>
+				</choose>
 				ORDER BY num DESC) result1)
 		WHERE rnum BETWEEN #{startRowNum} AND #{endRowNum}
 	</select>

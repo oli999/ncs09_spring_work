@@ -13,6 +13,17 @@
 	<jsp:param value="file" name="category"/>
 </jsp:include>
 <div class="container">
+	<c:choose>
+		<c:when test="${not empty keyword }">
+			<p>
+				<strong>${keyword }</strong> 키워드로 검색된
+				<strong>${totalRow }</strong> 개의 파일이 있습니다.	
+			</p>
+		</c:when>
+		<c:otherwise>
+			<p><strong>${totalRow }</strong> 개의 파일이 있습니다.</p>
+		</c:otherwise>
+	</c:choose>
 	<h1>파일 목록 입니다.</h1>
 	<table class="table table-striped table-condensed">
 		<thead>
@@ -56,7 +67,7 @@
 			<c:choose>
 				<c:when test="${startPageNum ne 1 }">
 					<li>
-						<a href="list.do?pageNum=${startPageNum-1 }">&laquo;</a>
+						<a href="list.do?pageNum=${startPageNum-1 }&condition=${condition}&keyword=${encodedKeyword}">&laquo;</a>
 					</li>
 				</c:when>
 				<c:otherwise>
@@ -70,12 +81,12 @@
 				<c:choose>
 					<c:when test="${i eq pageNum }">
 						<li class="active">
-							<a href="list.do?pageNum=${i }">${i }</a>
+							<a href="list.do?pageNum=${i }&condition=${condition}&keyword=${encodedKeyword}">${i }</a>
 						</li>
 					</c:when>
 					<c:otherwise>
 						<li>
-							<a href="list.do?pageNum=${i }">${i }</a>
+							<a href="list.do?pageNum=${i }&condition=${condition}&keyword=${encodedKeyword}">${i }</a>
 						</li>
 					</c:otherwise>
 				</c:choose>
@@ -83,7 +94,7 @@
 			<c:choose>
 				<c:when test="${endPageNum lt totalPageCount }">
 					<li>
-						<a href="list.do?pageNum=${endPageNum+1 }">&raquo;</a>
+						<a href="list.do?pageNum=${endPageNum+1 }&condition=${condition}&keyword=${encodedKeyword}">&raquo;</a>
 					</li>
 				</c:when>
 				<c:otherwise>
@@ -94,7 +105,18 @@
 			</c:choose>
 		</ul>
 	</div>
-</div>
+	<form action="list.do" method="get">
+		<label for="condition">검색조건</label>
+		<select name="condition" id="condition">
+			<option value="titlename">제목+파일명</option>
+			<option value="title">제목</option>
+			<option value="writer">작성자</option>
+		</select>
+		<input type="text" name="keyword" id="keyword" 
+			placeholder="검색어..."/>
+		<button type="submit">검색</button>
+	</form>
+</div><!-- /.container  -->
 <script>
 	//삭제 여부를 확인하고 삭제를 진행하는 javascript 함수 
 	function deleteConfirm(num){
