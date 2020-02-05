@@ -108,12 +108,12 @@
 	<form action="list.do" method="get">
 		<label for="condition">검색조건</label>
 		<select name="condition" id="condition">
-			<option value="titlename">제목+파일명</option>
-			<option value="title">제목</option>
-			<option value="writer">작성자</option>
+			<option value="titlename" <c:if test="${condition eq 'titlename' }">selected</c:if>>제목+파일명</option>
+			<option value="title" <c:if test="${condition eq 'title' }">selected</c:if>>제목</option>
+			<option value="writer" <c:if test="${condition eq 'writer' }">selected</c:if>>작성자</option>
 		</select>
 		<input type="text" name="keyword" id="keyword" 
-			placeholder="검색어..."/>
+			placeholder="검색어..." value="${keyword }"/>
 		<button type="submit">검색</button>
 	</form>
 </div><!-- /.container  -->
