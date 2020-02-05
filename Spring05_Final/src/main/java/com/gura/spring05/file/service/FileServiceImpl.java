@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.gura.spring05.file.dao.FileDao;
 import com.gura.spring05.file.dto.FileDto;
@@ -105,6 +106,20 @@ public class FileServiceImpl implements FileService{
 		dto.setFileSize(fileSize);
 		//FileDao 객체를 이용해서 DB 에 저장하기
 		dao.insert(dto);			
+	}
+
+	@Override
+	public void getFileData(ModelAndView mView, int num) {
+		//다운로드 시켜줄 파일의 정보를 얻어와서 
+		FileDto dto=dao.getData(num);
+		//ModelAndView 객체에 담아주기 
+		mView.addObject("dto", dto);
+	}
+
+	@Override
+	public void addDownCount(int num) {
+		//다운로드 횟수 증가 시키기 
+		dao.addDownCount(num);
 	}
 	
 }
