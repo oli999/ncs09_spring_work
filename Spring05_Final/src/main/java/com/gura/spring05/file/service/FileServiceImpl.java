@@ -121,6 +121,22 @@ public class FileServiceImpl implements FileService{
 		//다운로드 횟수 증가 시키기 
 		dao.addDownCount(num);
 	}
+
+	@Override
+	public void removeFile(HttpServletRequest request) {
+		//1. 삭제할 파일의 번호를 읽어온다.
+		int num=Integer.parseInt(request.getParameter("num"));
+		//2. 삭제할 파일의 정보를 읽어와서 삭제할 파일의 저장된 파일명을 얻어낸다.
+		FileDto dto=dao.getData(num);
+		String saveFileName=dto.getSaveFileName();
+		//3. DB 에서 파일 정보 삭제
+		dao.delete(num);
+		//4. 파일 시스템에서 파일 삭제
+		String path=request.getServletContext().getRealPath("/upload")+
+			File.separator+saveFileName;
+		File f=new File(path);
+		f.delete();
+	}
 	
 }
 

@@ -56,7 +56,18 @@ public class FileController {
 		mView.setViewName("fileDownView"); 
 		return mView;
 	}
+	@RequestMapping("/file/delete")
+	public ModelAndView authDelete(HttpServletRequest request) {
+		service.removeFile(request);
+		return new ModelAndView("redirect:/file/list.do");
+	}
 }
+
+
+
+
+
+
 
 
 

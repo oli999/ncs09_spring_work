@@ -33,6 +33,10 @@
 		SET downCount=downCount+1
 		WHERE num=#{num}
 	</update>
+	<delete id="delete" parameterType="int">
+		DELETE FROM board_file
+		WHERE num=#{num}
+	</delete>
 </mapper>
 
 
