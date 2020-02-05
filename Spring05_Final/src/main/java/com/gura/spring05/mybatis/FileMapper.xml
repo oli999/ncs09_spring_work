@@ -1,7 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="file">
-	
+	<select id="getCount" resultType="int">
+		SELECT MAX(ROWNUM)
+		FROM board_file
+	</select>
+	<select id="getList" parameterType="fileDto" resultType="fileDto">
+		SELECT *
+		FROM
+			(SELECT result1.*, ROWNUM AS rnum
+			FROM
+				(SELECT num,writer,title,orgFileName,fileSize,downCount,regdate
+				FROM board_file
+				ORDER BY num DESC) result1)
+		WHERE rnum BETWEEN #{startRowNum} AND #{endRowNum}
+	</select>
 </mapper>
 
 
