@@ -1,5 +1,7 @@
 package com.gura.spring05.cafe.service;
 
-public interface CafeService {
+import javax.servlet.http.HttpServletRequest;
 
+public interface CafeService {
+	public void getList(HttpServletRequest request);
 }
