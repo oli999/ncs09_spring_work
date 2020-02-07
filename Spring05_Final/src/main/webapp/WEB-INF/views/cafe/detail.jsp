@@ -62,13 +62,12 @@
 		</tr>
 	</table>
 	<div class="contents">${dto.content }</div>
-	<a href="list.do">목록 보기</a>
 	<%-- 
 		글 작성자와 로그인 된 아이디가 같을때만 기능을 제공해 준다. 
 		즉, 본인이 작성한 글만 수정할수 있도록 하기 위해
 	--%>
 	<c:if test="${dto.writer eq id }">
-		<a href="private/updateform.jsp?num=${dto.num }">
+		<a href="updateform.do?num=${dto.num }">
 			수정
 		</a>
 		<a href="javascript:deleteConfirm()">삭제</a>
@@ -78,7 +77,7 @@
 	function deleteConfirm(){
 		var isDelete=confirm("글을 삭제 하시 겠습니까?");
 		if(isDelete){
-			location.href="private/delete.do?num=${dto.num}";
+			location.href="delete.do?num=${dto.num}";
 		}
 	}
 </script>
