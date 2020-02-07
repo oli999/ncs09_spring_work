@@ -10,7 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.gura.spring05.cafe.dao.CafeCommentDao;
 import com.gura.spring05.cafe.dao.CafeDao;
+import com.gura.spring05.cafe.dto.CafeCommentDto;
 import com.gura.spring05.cafe.dto.CafeDto;
 import com.gura.spring05.exception.CanNotDeleteException;
 
@@ -18,6 +20,8 @@ import com.gura.spring05.exception.CanNotDeleteException;
 public class CafeServiceImpl implements CafeService{
 	@Autowired
 	private CafeDao cafeDao;
+	@Autowired
+	private CafeCommentDao cafeCommentDao;
 
 	//한 페이지에 나타낼 row 의 갯수 
 	static final int PAGE_ROW_COUNT=5;
@@ -187,6 +191,43 @@ public class CafeServiceImpl implements CafeService{
 	public void updateContent(CafeDto dto) {
 		//CafeDao 객체를 이용해서 원글을 수정 반영한다. 
 		cafeDao.update(dto);
+	}
+	//댓글 저장하는 메소드 
+	@Override
+	public void saveComment(HttpServletRequest request) {
+		//댓글 작성자
+		String writer=(String)request.getSession()
+				.getAttribute("id");
+		//댓글의 그룹번호
+		int ref_group=
+			Integer.parseInt(request.getParameter("ref_group"));
+		//댓글의 대상자 아이디
+		String target_id=request.getParameter("target_id");
+		//댓글의 내용
+		String content=request.getParameter("content");
+		//댓글 내에서의 그룹번호 (null 이면 원글의 댓글이다)
+		String comment_group=
+				request.getParameter("comment_group");		
+		//저장할 댓글의 primary key 값이 필요하다
+		int seq = cafeCommentDao.getSequence();
+		//댓글 정보를 Dto 에 담기
+		CafeCommentDto dto=new CafeCommentDto();
+		dto.setNum(seq);
+		dto.setWriter(writer);
+		dto.setTarget_id(target_id);
+		dto.setContent(content);
+		dto.setRef_group(ref_group);
+		
+		if(comment_group==null) {//원글의 댓글인 경우
+			//댓글의 글번호가 댓글의 그룹 번호가 된다.
+			dto.setComment_group(seq);
+		}else {//댓글의 댓글인 경우
+			//comment_group 번호가 댓글의 그룹번호가 된다.
+			dto.setComment_group
+				(Integer.parseInt(comment_group));
+		}
+		//댓글 정보를 DB 에 저장한다.
+		cafeCommentDao.insert(dto);				
 	}
 }
 

@@ -15,4 +15,14 @@ public interface CafeService {
 	public void getUpdateData(ModelAndView mView, int num);
 	//원글 수정하는 메소드 
 	public void updateContent(CafeDto dto);	
+	//댓글 저장하는 메소드
+	public void saveComment(HttpServletRequest request);
 }
+
+
+
+
+
+
+
+

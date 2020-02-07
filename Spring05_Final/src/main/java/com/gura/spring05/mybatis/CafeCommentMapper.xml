@@ -8,6 +8,7 @@
 		INNER JOIN users
 		ON board_cafe_comment.writer = users.id
 		WHERE ref_group=#{ref_group}
+		ORDER BY comment_group ASC, num ASC
 	</select>
 	<update id="delete" parameterType="int">
 		UPDATE board_cafe_comment
