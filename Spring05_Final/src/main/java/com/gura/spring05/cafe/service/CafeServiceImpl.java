@@ -168,6 +168,9 @@ public class CafeServiceImpl implements CafeService{
 		CafeDto dto2=cafeDao.getData(dto);
 		//request 에 글정보를 담고 
 		request.setAttribute("dto", dto2);
+		//댓글 목록을 얻어와서 request 에 담아준다.
+		List<CafeCommentDto> commentList=cafeCommentDao.getList(num);
+		request.setAttribute("commentList", commentList);
 	}
 
 	@Override
