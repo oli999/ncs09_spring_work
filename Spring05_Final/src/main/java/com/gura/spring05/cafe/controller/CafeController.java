@@ -1,5 +1,8 @@
 package com.gura.spring05.cafe.controller;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.gura.spring05.cafe.dto.CafeDto;
@@ -101,6 +105,21 @@ public class CafeController {
 			@RequestParam int ref_group) {
 		service.saveComment(request);
 		return new ModelAndView("redirect:/cafe/detail.do?num="+ref_group);
+	}
+	
+	//댓글 삭제 요청 처리
+	@ResponseBody
+	@RequestMapping(value = "/cafe/comment_delete", 
+			method = RequestMethod.POST)
+	public Map<String, Object> 
+		authCommentDelete(HttpServletRequest request,
+			@RequestParam int num){
+		
+		service.deleteComment(num);
+		
+		Map<String, Object> map=new HashMap<>();
+		map.put("isSuccess", true);
+		return map; // {"isSuccess":true} 형식의 JSON 문자열이 응답된다.
 	}
 }
 
