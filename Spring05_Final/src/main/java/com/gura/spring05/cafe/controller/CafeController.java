@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.gura.spring05.cafe.dto.CafeCommentDto;
 import com.gura.spring05.cafe.dto.CafeDto;
 import com.gura.spring05.cafe.service.CafeService;
 
@@ -120,6 +121,19 @@ public class CafeController {
 		Map<String, Object> map=new HashMap<>();
 		map.put("isSuccess", true);
 		return map; // {"isSuccess":true} 형식의 JSON 문자열이 응답된다.
+	}
+	//댓글 수정 요청 처리(ajax)
+	@ResponseBody
+	@RequestMapping("/cafe/comment_update")
+	public Map<String, Object> 
+		authCommentUpdate(HttpServletRequest request,
+				@ModelAttribute CafeCommentDto dto){
+		
+		service.updateComment(dto);
+		
+		Map<String, Object> map=new HashMap<>();
+		map.put("isSuccess", true);
+		return map;
 	}
 }
 

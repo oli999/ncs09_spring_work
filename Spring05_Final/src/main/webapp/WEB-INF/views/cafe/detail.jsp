@@ -172,7 +172,7 @@
 						</form>	
 						<!-- 로그인한 아이디와 댓글의 작성자와 같으면 수정폼 출력 -->				
 						<c:if test="${id eq tmp.writer }">
-							<form class="comment-update-form" action="comment_update.do">
+							<form class="comment-update-form" action="comment_update.do" method="post">
 								<input type="hidden" name="num" value="${tmp.num }" />
 								<textarea name="content">${tmp.content }</textarea>
 								<button type="submit">수정</button>
@@ -213,7 +213,7 @@
 	
 	//댓글 수정 폼에 submit 이벤트가 일어났을때 호출되는 함수 등록
 	$(".comment-update-form").on("submit", function(){
-		// "private/comment_update.do"
+		// "comment_update.do"
 		var url=$(this).attr("action");
 		//폼에 작성된 내용을 query 문자열로 읽어온다.
 		// num=댓글번호&content=댓글내용
