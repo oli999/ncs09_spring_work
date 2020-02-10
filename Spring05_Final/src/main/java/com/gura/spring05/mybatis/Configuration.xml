@@ -10,6 +10,10 @@
 	    <typeAlias type="com.gura.spring05.file.dto.FileDto" alias="fileDto"/>
 	    <typeAlias type="com.gura.spring05.cafe.dto.CafeDto" alias="cafeDto"/>
 	    <typeAlias type="com.gura.spring05.cafe.dto.CafeCommentDto" alias="cafeCommentDto"/>
+		<typeAlias type="com.gura.spring05.shop.dto.ShopDto"
+		 	alias="shopDto"/>
+		<typeAlias type="com.gura.spring05.shop.dto.OrderDto"
+			alias="orderDto"/>
 	</typeAliases>
 
 	<!-- mapper 설정 -->
