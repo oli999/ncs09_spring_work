@@ -26,6 +26,14 @@ public class ExceptionController {
 		mView.setViewName("error/forbidden");
 		return mView;
 	}
+	// custom 예외 처리 
+	@ExceptionHandler(NoDeliveryException.class)
+	public ModelAndView noDelivery(NoDeliveryException nde) {
+		ModelAndView mView=new ModelAndView();
+		mView.addObject("exception", nde);
+		mView.setViewName("error/data_access");
+		return mView;
+	}
 	
 	/*
 	 *  @Repository 어노테이션이 작성된 Dao 에서 DB 관련 Exception 이 발생하면
