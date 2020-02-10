@@ -21,26 +21,26 @@ public class ShopDaoImpl implements ShopDao{
 
 	@Override
 	public void minusCount(int num) {
-		// TODO Auto-generated method stub
-		
+		//제고의 갯수 줄이기 
+		session.update("shop.minusCount", num);
 	}
 
 	@Override
 	public void minusMoney(ShopDto dto) {
-		// TODO Auto-generated method stub
-		
+		//계좌 잔액 줄이기
+		session.update("shop.minusMoney", dto);
 	}
 
 	@Override
 	public void plusPoint(ShopDto dto) {
-		// TODO Auto-generated method stub
-		
+		//보너스 포인트 쌓기
+		session.update("shop.plusPoint", dto);
 	}
 
 	@Override
 	public int getPrice(int num) {
-		// TODO Auto-generated method stub
-		return 0;
+		//가격 select 해서 리턴하기
+		return session.selectOne("shop.getPrice", num);
 	}
 
 }

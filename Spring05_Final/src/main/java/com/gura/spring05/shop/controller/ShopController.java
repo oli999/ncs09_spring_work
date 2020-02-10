@@ -1,5 +1,7 @@
 package com.gura.spring05.shop.controller;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,6 +18,13 @@ public class ShopController {
 	public ModelAndView list(ModelAndView mView) {
 		service.getList(mView);
 		mView.setViewName("shop/list");
+		return mView;
+	}
+	@RequestMapping("/shop/buy")
+	public ModelAndView authBuy(HttpServletRequest request,
+			ModelAndView mView) {
+		service.buy(request, mView);
+		mView.setViewName("shop/buy");
 		return mView;
 	}
 }
