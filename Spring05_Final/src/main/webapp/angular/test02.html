@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>webapp/angular/test02.html</title>
+<link rel="stylesheet" href="../resources/css/bootstrap.css" />
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.32/angular.min.js"></script>
+</head>
+<body ng-app>
+<div class="container">
+	<button class="btn" ng-class="{'btn-primary':true}">버튼</button>
+	<br/>
+	<label>
+		<input type="checkbox" ng-model="isPrimary"/> Primary
+	</label>
+	<label>
+		<input type="checkbox" ng-model="isBlock"/> Block
+	</label>
+	<br/>
+	<button class="btn" ng-class="{'btn-primary':isPrimary,'btn-block':isBlock}">버튼</button>
+	<br/>
+	<select ng-model="color" ng-init="color='btn-primary'">
+		<option value="btn-primary">primary</option>
+		<option value="btn-success">success</option>
+		<option value="btn-info">info</option>
+		<option value="btn-warning">warning</option>
+		<option value="btn-danger">danger</option>
+	</select>
+	<br/>
+	<button class="btn {{color}}">버튼</button>
+</div>
+</body>
+</html>
+
+
+
+
+

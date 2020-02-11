@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>webapp/angular/test01.html</title>
+<!-- angularjs 로딩하기 -->
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.32/angular.min.js"></script>
+</head>
+<!-- body 안에서 일어나는 일은 default 컨트롤러로 처리 하겠다는 의미 -->
+<body ng-app>
+<div class="container">
+	<!-- ng-xxx 는 디렉티브라고 한다  -->
+	<h1>ng-show ng-hide directive</h1>
+	<img src="../resources/images/kim1.png" ng-show="true"/>
+	<img src="../resources/images/rabbit_1.png" ng-hide="true" />
+	<br/>
+	<label>
+		<!-- checkbox 의 체크 여부를 isChecked 라는 모델명으로 관리하기 -->
+		<input type="checkbox" ng-model="isChecked"/> 보이게 할지 여부
+	</label>
+	<br/>
+	<img src="../resources/images/image1.png" ng-show="isChecked"/>
+	<br/>
+	<!-- input 요소에 입력한 문자열을 msg 라는 모델명으로 관리하기 -->
+	<input type="text" ng-model="msg" placeholder="문자열 입력..."/>
+	<!-- msg 라는 모델안에 들어 있는 문자열을 출력하기 -->
+	<p>{{msg}}</p>
+	<p ng-bind="msg"></p>
+</div>
+</body>
+</html>
+
+
+
+
+
