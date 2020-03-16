@@ -1,6 +1,8 @@
 package com.gura.spring05.member.dao;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +42,21 @@ public class MemberDaoImpl implements MemberDao{
 	@Override
 	public void update(MemberDto dto) {
 		session.update("member.update", dto);
+	}
+
+	@Override
+	public List<Map<String, Object>> getList2() {
+		
+		List<Map<String, Object>> list=
+				session.selectList("member.getList2");
+	
+		return list;
+	}
+
+	@Override
+	public List<Map<String, Object>> memberGetList() {
+		
+		return session.selectList("memberGetList");
 	}
 
 }

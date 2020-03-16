@@ -6,7 +6,11 @@
 		FROM member
 		ORDER BY num ASC
 	</select>
-	
+	<select id="getList2" resultType="java.util.HashMap">
+		SELECT num, name, addr
+		FROM member
+		ORDER BY num ASC
+	</select>
 	<delete id="delete" parameterType="int">
 		DELETE FROM member
 		WHERE num=#{num}
@@ -30,6 +34,11 @@
 		WHERE num=#{num}
 	</update>
 	
+	<select id="memberGetList" resultType="java.util.HashMap">
+		SELECT num, name
+		FROM member
+		ORDER BY num ASC
+	</select>		
 </mapper>
 
 
