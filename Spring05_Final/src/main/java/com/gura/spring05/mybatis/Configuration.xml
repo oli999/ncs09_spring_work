@@ -24,6 +24,7 @@
 		<mapper resource="com/gura/spring05/mybatis/CafeMapper.xml"/>
 		<mapper resource="com/gura/spring05/mybatis/CafeCommentMapper.xml"/>
 		<mapper resource="com/gura/spring05/mybatis/ShopMapper.xml"/>
+		<mapper resource="com/gura/spring05/mybatis/AndroidMapper.xml"/>
 	</mappers>
 </configuration>
 

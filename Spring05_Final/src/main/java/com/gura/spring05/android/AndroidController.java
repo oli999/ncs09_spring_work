@@ -1,9 +1,12 @@
 package com.gura.spring05.android;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,6 +14,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.gura.spring05.member.dao.MemberDao;
 import com.gura.spring05.member.dto.MemberDto;
@@ -20,6 +24,8 @@ public class AndroidController {
 	
 	@Autowired
 	private MemberDao memberDao;
+	@Autowired
+	private AndroidDao androidDao;
 	
 	/*
 	 * 	["김구라","해골","원숭이"] 형식의 문자열이 응답되는 메소드 
@@ -92,7 +98,51 @@ public class AndroidController {
 		memberDao.insert(dto);
 		return "{\"isSuccess\":true}";
 	}
+	@ResponseBody
+	@RequestMapping("/android/image/upload")
+	public String imageUpload(HttpServletRequest request,
+			ImageDto dto) {
+		//파일을 저장할 폴더의 절대 경로를 얻어온다.
+		String realPath=request.getServletContext().getRealPath("/upload");
+		//콘솔창에 테스트 출력
+		System.out.println(realPath);
+		
+		//MultipartFile 객체의 참조값 얻어오기
+		//FileDto 에 담긴 MultipartFile 객체의 참조값을 얻어온다.
+		MultipartFile mFile=dto.getMyFile();
+		//원본 파일명
+		String orgFileName=mFile.getOriginalFilename();
+		
+		//저장할 파일의 상세 경로
+		String filePath=realPath+File.separator;
+		//디렉토리를 만들 파일 객체 생성
+		File file=new File(filePath);
+		if(!file.exists()){//디렉토리가 존재하지 않는다면
+			file.mkdir();//디렉토리를 만든다.
+		}
+		//파일 시스템에 저장할 파일명을 만든다. (겹치치 않게)
+		String saveFileName=
+				System.currentTimeMillis()+orgFileName;
+		try{
+			//upload 폴더에 파일을 저장한다.
+			mFile.transferTo(new File(filePath+saveFileName));
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		//FileDto 객체에 추가 정보를 담는다.
+		dto.setImagePath("/upload/"+saveFileName);
+		//FileDao 객체를 이용해서 DB 에 저장하기
+		androidDao.insert(dto);		
+		
+		return "{\"isSuccess\":true}";
+	}
 	
+	@ResponseBody
+	@RequestMapping("/android/image/list")
+	public List<ImageDto> imageList(){
+		
+		return androidDao.getList();
+	}
 }
 
 

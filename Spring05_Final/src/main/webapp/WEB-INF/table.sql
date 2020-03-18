@@ -86,6 +86,15 @@ VALUES('superman', 10000, 0);
 INSERT INTO client_account (id, money, point)
 VALUES('batman', 10000, 0);
 
+CREATE TABLE android_image(
+	num NUMBER PRIMARY KEY,
+	writer VARCHAR2(100),
+	imagePath VARCHAR2(100),
+	regdate DATE
+);
+
+CREATE SEQUENCE android_image_seq;
+
 
 
 
