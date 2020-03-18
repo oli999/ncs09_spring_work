@@ -7,10 +7,13 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.gura.spring05.member.dao.MemberDao;
+import com.gura.spring05.member.dto.MemberDto;
 
 @Controller
 public class AndroidController {
@@ -55,6 +58,39 @@ public class AndroidController {
 	public List<Map<String, Object>> memberGetList(){
 		
 		return memberDao.memberGetList();
+	}
+	/*
+	 *  Dto 를 리턴하고 @ResponseBody 어노 테에션을 붙여도 
+	 *  Map 을 리턴한것과 동일하게 응답된다.
+	 *  {"num":1,"name":"김구라","addr":"노량진"}
+	 */
+	@ResponseBody
+	@RequestMapping("/android/member/detail")
+	public MemberDto memberDetail(@RequestParam int num) {
+	
+		return memberDao.getData(num);
+	}
+	
+	@ResponseBody
+	@RequestMapping("/android/member/delete")
+	public String memberDelete(@RequestParam int num) {
+		
+		memberDao.delete(num);
+		
+		return "{\"isSuccess\":true}";
+	}
+	/*
+	 *   name=김구라&addr=노량진
+	 *   
+	 *   MemberDto dto=new MemberDto();
+	 *   dto.setName(name);
+	 *   dto.setAddr(addr);
+	 */
+	@ResponseBody
+	@RequestMapping("/android/member/insert")
+	public String memberInsert(@ModelAttribute MemberDto dto) {
+		memberDao.insert(dto);
+		return "{\"isSuccess\":true}";
 	}
 	
 }
